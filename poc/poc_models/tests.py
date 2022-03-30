@@ -28,21 +28,21 @@ class FKTestCase(TestCase):
         db_objects = Object.objects.filter(remote_object_id=1234)
         self.assertIsNotNone(db_objects.first())
 
-    # def test_remote_object_does_not_exist_object_with_select_related_should_be_found(self):
-    #     ''' This one fails while it should not, due to the select_related addition '''
+    def test_remote_object_does_not_exist_object_with_select_related_should_be_found(self):
+        ''' This one fails while it should not, due to the select_related addition '''
 
-    #     # Note that the only difference here versus the test above (test_remote_object_does_not_exist_object_should_be_found) is the
-    #     # addition of the select_related call, which breaks the lookup. Note the query below which incorrectly uses an INNER JOIN statement.
-    #     # Since the remote object does not exist, this join will remove the row from the results, which is incorrect behaviour.
-    #     db_objects = Object.objects.filter(remote_object_id=1234).select_related('remote_object')
+        # Note that the only difference here versus the test above (test_remote_object_does_not_exist_object_should_be_found) is the
+        # addition of the select_related call, which breaks the lookup. Note the query below which incorrectly uses an INNER JOIN statement.
+        # Since the remote object does not exist, this join will remove the row from the results, which is incorrect behaviour.
+        db_objects = Object.objects.filter(remote_object_id=1234).select_related('remote_object')
 
-    #     # print(db_objects._query)
-    #     # SELECT "poc_models_object"."id", "poc_models_object"."remote_object_id", "poc_models_remoteobject"."id", "poc_models_remoteobject"."remote_id"
-    #     # FROM "poc_models_object"
-    #     #     INNER JOIN "poc_models_remoteobject" ON ("poc_models_object"."remote_object_id" = "poc_models_remoteobject"."remote_id")
-    #     # WHERE "poc_models_object"."remote_object_id" = 1234
+        # print(db_objects._query)
+        # SELECT "poc_models_object"."id", "poc_models_object"."remote_object_id", "poc_models_remoteobject"."id", "poc_models_remoteobject"."remote_id"
+        # FROM "poc_models_object"
+        #     INNER JOIN "poc_models_remoteobject" ON ("poc_models_object"."remote_object_id" = "poc_models_remoteobject"."remote_id")
+        # WHERE "poc_models_object"."remote_object_id" = 1234
 
-    #     self.assertIsNotNone(db_objects.first())
+        self.assertIsNotNone(db_objects.first())
 
     def test_remote_object_does_not_exist_object_no_filter_with_select_related_should_be_found(self):
         ''' This one works, even with select_related, because we don't filter the QS '''

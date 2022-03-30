@@ -10,3 +10,5 @@ pip install django
 cd poc
 python manage.py test
 ```
+
+The test `test_remote_object_does_not_exist_object_with_select_related_should_be_found` contains the failing behaviour.
